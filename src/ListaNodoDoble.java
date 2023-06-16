@@ -1,54 +1,56 @@
-    class ListaDoble {
-    private Nodo cabeza;
 
-    public ListaDoble() {
+
+class ListaNodoDoble {
+    private NodoDoble cabeza;
+
+    public ListaNodoDoble() {
         this.cabeza = null;
     }
 
-    public boolean estaVacia() {
+    public boolean IsVacia() {
         return cabeza == null;
     }
 
-    public void agregarAlInicio(int dato) {
-        Nodo nuevoNodo = new Nodo(dato);
-        if (estaVacia()) {
+    public void agregarAlInicio(Pokemon poke) {
+        NodoDoble nuevoNodo = new NodoDoble(poke);
+        if (IsVacia()) {
             cabeza = nuevoNodo;
         } else {
-            nuevoNodo.siguiente = cabeza;
-            cabeza.anterior = nuevoNodo;
+            nuevoNodo.setSiguiente(cabeza);
+            cabeza.setAnterior(nuevoNodo);
             cabeza = nuevoNodo;
         }
     }
 
-    public void agregarAlFinal(int dato) {
-        Nodo nuevoNodo = new Nodo(dato);
-        if (estaVacia()) {
+    public void agregarAlFinal(Pokemon poke) {
+        NodoDoble nuevoNodo = new NodoDoble(poke);
+        if (IsVacia()) {
             cabeza = nuevoNodo;
         } else {
-            Nodo actual = cabeza;
-            while (actual.siguiente != null) {
-                actual = actual.siguiente;
+            NodoDoble actual = cabeza;
+            while (actual.getSiguiente() != null) {
+                actual = actual.getSiguiente();
             }
-            actual.siguiente = nuevoNodo;
-            nuevoNodo.anterior = actual;
+            actual.setSiguiente(nuevoNodo);
+            nuevoNodo.setAnterior(actual);
         }
     }
 
-    public void eliminar(int dato) {
-        if (estaVacia()) {
+    public void eliminar(Pokemon poke) {
+        if (IsVacia()) {
             System.out.println("La lista está vacía");
             return;
         }
 
-        if (cabeza.dato == dato) {
-            cabeza = cabeza.siguiente;
-            cabeza.anterior = null;
+        if (cabeza.getPokemon() == poke) {
+            cabeza = cabeza.getSiguiente();
+            cabeza.setAnterior(null);
             return;
         }
 
-        Nodo actual = cabeza;
-        while (actual != null && actual.dato != dato) {
-            actual = actual.siguiente;
+        NodoDoble actual = cabeza;
+        while (actual != null && actual.getPokemon() != poke) {
+            actual = actual.getSiguiente();
         }
 
         if (actual == null) {
@@ -56,57 +58,36 @@
             return;
         }
 
-        if (actual.siguiente != null) {
-            actual.siguiente.anterior = actual.anterior;
+        if (actual.getSiguiente() != null) {
+            actual.getSiguiente().setAnterior(actual.getAnterior());
         }
-        actual.anterior.siguiente = actual.siguiente;
+        actual.getAnterior().setSiguiente(actual.getSiguiente());
     }
 
     public void imprimirAdelante() {
-        Nodo actual = cabeza;
+        NodoDoble actual = cabeza;
         while (actual != null) {
-            System.out.print(actual.dato + " ");
-            actual = actual.siguiente;
+            System.out.print(actual.getPokemon() + " ");
+            actual = actual.getSiguiente();
         }
         System.out.println();
     }
 
     public void imprimirAtras() {
-        if (estaVacia()) {
+        if (IsVacia()) {
             System.out.println("La lista está vacía");
             return;
         }
 
-        Nodo actual = cabeza;
-        while (actual.siguiente != null) {
-            actual = actual.siguiente;
+        NodoDoble actual = cabeza;
+        while (actual.getSiguiente() != null) {
+            actual = actual.getSiguiente();
         }
 
         while (actual != null) {
-            System.out.print(actual.dato + " ");
-            actual = actual.anterior;
+            System.out.print(actual.getPokemon() + " ");
+            actual = actual.getAnterior();
         }
         System.out.println();
     }
 }
-
-public class Main {
-    public static void main(String[] args) {
-        ListaDoble lista = new ListaDoble();
-        lista.agregarAlInicio(3);
-        lista.agregarAlInicio(2);
-        lista.agregarAlInicio(1);
-
-        lista.imprimirAdelante();  // Salida: 1 2 3
-        lista.imprimirAtras();     // Salida: 3 2 1
-
-        lista.agregarAlFinal(4);
-        lista.agregarAlFinal(5);
-
-        lista.imprimirAdelante();  // Salida: 1 2 3 4 5
-        lista.imprimirAtras();     // Salida: 5 4 3 2 1
-
-        lista.eliminar(3);
-
-        lista.imprimirAdelante();  // Salida: 1 2 4 5
-        lista.imprimirAtras();     // Salida:
