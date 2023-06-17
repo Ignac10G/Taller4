@@ -11,8 +11,8 @@ class ListaNodoDoble {
         return cabeza == null;
     }
 
-    public void agregarAlInicio(Pokemon poke) {
-        NodoDoble nuevoNodo = new NodoDoble(poke);
+    public void agregarAlInicio(Pokemon pokemon) {
+        NodoDoble nuevoNodo = new NodoDoble(pokemon);
         if (IsVacia()) {
             cabeza = nuevoNodo;
         } else {
@@ -22,8 +22,8 @@ class ListaNodoDoble {
         }
     }
 
-    public void agregarAlFinal(Pokemon poke) {
-        NodoDoble nuevoNodo = new NodoDoble(poke);
+    public void agregarAlFinal(Pokemon pokemon) {
+        NodoDoble nuevoNodo = new NodoDoble(pokemon);
         if (IsVacia()) {
             cabeza = nuevoNodo;
         } else {
@@ -36,20 +36,20 @@ class ListaNodoDoble {
         }
     }
 
-    public void eliminar(Pokemon poke) {
+    public void eliminar(Pokemon pokemon) {
         if (IsVacia()) {
             System.out.println("La lista está vacía");
             return;
         }
 
-        if (cabeza.getPokemon() == poke) {
+        if (cabeza.getPokemon() == pokemon) {
             cabeza = cabeza.getSiguiente();
             cabeza.setAnterior(null);
             return;
         }
 
         NodoDoble actual = cabeza;
-        while (actual != null && actual.getPokemon() != poke) {
+        while (actual != null && actual.getPokemon() != pokemon) {
             actual = actual.getSiguiente();
         }
 
@@ -89,5 +89,8 @@ class ListaNodoDoble {
             actual = actual.getAnterior();
         }
         System.out.println();
+    }
+
+    public void insertar(Pokemon pokemon) {
     }
 }
