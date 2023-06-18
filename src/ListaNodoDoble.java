@@ -2,6 +2,7 @@
 
 class ListaNodoDoble {
     private NodoDoble cabeza;
+    private NodoDoble tail;
 
     public ListaNodoDoble() {
         this.cabeza = null;
@@ -92,5 +93,30 @@ class ListaNodoDoble {
     }
 
     public void insertar(Pokemon pokemon) {
+        NodoDoble nuevoNodo = new NodoDoble(pokemon);
+        if (this.cabeza == null) {
+            this.cabeza = nuevoNodo;
+            this.tail = nuevoNodo;
+            cabeza.setSiguiente(null);
+            tail.setSiguiente(null);
+        }
+        cabeza.setAnterior(null);
+        tail.setSiguiente(null);
+
+        NodoDoble aux = this.cabeza;
+        while (aux.getSiguiente() != null){
+            aux = aux.getSiguiente();
+        }
+        aux.setSiguiente(nuevoNodo);
+        nuevoNodo.setAnterior(aux);
+        setTail(nuevoNodo);
+    }
+
+    public void setTail(NodoDoble tail) {
+        this.tail = tail;
+    }
+
+    public NodoDoble getTail() {
+        return tail;
     }
 }
