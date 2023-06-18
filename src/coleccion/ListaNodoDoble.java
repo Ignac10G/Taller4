@@ -72,6 +72,35 @@ public class ListaNodoDoble {
         actual.getAnterior().setSiguiente(actual.getSiguiente());
     }
 
+<<<<<<< HEAD
+=======
+    public void imprimirAdelante() {
+        NodoDoble actual = cabeza;
+        while (actual != null) {
+            System.out.println(actual.getPokemon().getNombre());
+            actual = actual.getSiguiente();
+        }
+    }
+
+    public void imprimirAtras() {
+        if (IsVacia()) {
+            System.out.println("La lista está vacía");
+            return;
+        }
+
+        NodoDoble actual = cabeza;
+        while (actual.getSiguiente() != null) {
+            actual = actual.getSiguiente();
+        }
+
+        while (actual != null) {
+            System.out.print(actual.getPokemon() + " ");
+            actual = actual.getAnterior();
+        }
+        System.out.println();
+    }
+
+>>>>>>> 37f2dcdbaeb7502f47cb5257eb24511759a2845b
     public void insertar(Pokemon pokemon) {
         NodoDoble nuevoNodo = new NodoDoble(pokemon);
         if (this.cabeza == null) {
@@ -126,4 +155,31 @@ public class ListaNodoDoble {
     }
 
     public NodoDoble getCabeza() {return cabeza;}
+
+
+    public void ordenarAlfabeticamente() {
+        if (IsVacia()) {
+            System.out.println("La lista está vacía");
+            return;
+        }
+
+        boolean cambio;
+        NodoDoble actual;
+        NodoDoble siguiente = null;
+
+        do {
+            cambio = false;
+            actual = cabeza;
+            while (actual.getSiguiente() != siguiente) {
+                if (actual.getPokemon().getNombre().compareTo(actual.getSiguiente().getPokemon().getNombre()) > 0) {
+                    Pokemon nuevo = actual.getPokemon();
+                    actual.setPokemon(actual.getSiguiente().getPokemon());
+                    actual.getSiguiente().setPokemon(nuevo);
+                    cambio = true;
+                }
+                actual = actual.getSiguiente();
+            }
+            siguiente = actual;
+        } while (cambio);
+    }
 }

@@ -113,7 +113,8 @@ public class Buscador implements Interface {
                     ordenarPokemonMenorMayor(listaPokemon.getCabeza());
                     break;
                 case "2":
-
+                    listaPokemon.ordenarAlfabeticamente();
+                    listaPokemon.imprimirAdelante();
                     //MostrarPokemonAlfabet();
                     break;
                 case "3":
