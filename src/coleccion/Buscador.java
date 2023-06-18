@@ -1,3 +1,9 @@
+package coleccion;
+
+import coleccion.Interface;
+import coleccion.ListaNodoDoble;
+import model.Pokemon;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -11,13 +17,15 @@ public class Buscador implements Interface {
 
     @Override
     public void lecturaArchivo() {
+        Scanner scanner = null;
         try {
-            Scanner scanner = new Scanner(new File("kanto.txt"));
-            while (scanner.hasNextLine()) {
-                String linea = scanner.nextLine().trim();
-                if (!linea.isEmpty()) {
-                    continue;
-                }
+            scanner = new Scanner(new File("kanto.txt"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        while (scanner.hasNextLine()) {
+            String linea = scanner.nextLine().trim();
+            if (!linea.isEmpty()) {
                 String[] datos = linea.split(",");
                 int id;
                 String nombre;
@@ -25,7 +33,7 @@ public class Buscador implements Interface {
                 String evolucion1;
                 String evolucion2;
                 String evolucion3;
-                String evolucionSiguiente;
+                String evolucionAnterior;
                 String tipo1;
                 String tipo2;
 
@@ -34,10 +42,10 @@ public class Buscador implements Interface {
                     nombre = datos[1].trim();
                     etapa = datos[2].trim();
                     evolucion1 = datos[3].trim();
-                    evolucionSiguiente = datos[4].trim();
+                    evolucionAnterior = datos[4].trim();
                     tipo1 = datos[5].trim();
                     tipo2 = datos[6].trim();
-                    Pokemon pokemon = new Pokemon(id, nombre, etapa, evolucion1, evolucionSiguiente, tipo1, tipo2);
+                    Pokemon pokemon = new Pokemon(id, nombre, etapa, evolucion1, evolucionAnterior, tipo1, tipo2);
                     listaPokemon.insertar(pokemon);
                 }
                 else if (datos.length==8){
@@ -70,18 +78,18 @@ public class Buscador implements Interface {
                     tipo2 = datos[5].trim();
                     Pokemon pokemon = new Pokemon(id,nombre,etapa,evolucion1,tipo1,tipo2);
                     listaPokemon.insertar(pokemon);
+
                 }
             }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
+        scanner.close();
     }
+
 
     @Override
     public void menu() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner1 = new Scanner(System.in);
         String opcion;
         do {
             System.out.println("---------- Pokédex (Contenedor de Pokemons)----------");
@@ -93,23 +101,27 @@ public class Buscador implements Interface {
             System.out.println("6) Salir");
             System.out.println("Seleccione una opción: ");
             System.out.println("------------------------------------------------------");
-            opcion = scanner.nextLine();
+            opcion = scanner1.nextLine();
 
             switch (opcion) {
                 case "1":
-
+                    //MostrarPokemonPorRango();
                     break;
                 case "2":
 
+                    //MostrarPokemonAlfabet();
                     break;
                 case "3":
 
+                    //MostrarPokemonTipo();
                     break;
                 case "4":
 
+                    //MostrarTodosPrimeraEvo();
                     break;
                 case "5":
 
+                    //BuscarPokemon();
                     break;
                 case "6":
                     System.out.println("¡Nos vemos en la proxima ocasión!");
@@ -120,4 +132,6 @@ public class Buscador implements Interface {
             }
         } while (!opcion.equals("6"));
     }
+
 }
+

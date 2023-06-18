@@ -1,3 +1,5 @@
+package coleccion;
+
 public interface Interface {
 
     void lecturaArchivo();

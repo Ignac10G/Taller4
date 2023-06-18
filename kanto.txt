@@ -15,7 +15,7 @@
 
 
 26 , Raichu , Primera Evolucion,Pikachu, Electrico, Electrico
- 25,Pikachu, Basico ,Raichu , Electrico,Electrico
+ 25,Pikachu, Basico ,Raichu , Electrico,Electricoz
 23 ,Ekans ,Basico,Arbok, Veneno , Veneno
 
 
