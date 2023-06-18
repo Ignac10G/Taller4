@@ -74,11 +74,10 @@ public class ListaNodoDoble {
             return;
         }
         NodoDoble actual = cabeza;
-        while (actual.getSiguiente() != null) {
-            System.out.print(actual.getPokemon() + " ");
+        while (actual != null) {
+            System.out.println(actual.getPokemon().getNombre());
             actual = actual.getSiguiente();
         }
-        System.out.println();
     }
 
     public void imprimirAtras() {
@@ -131,4 +130,32 @@ public class ListaNodoDoble {
     }
 
     public NodoDoble getCabeza() {return cabeza;}
+
+
+    public void ordenarAlfabeticamente() {
+        if (IsVacia()) {
+            System.out.println("La lista está vacía");
+            return;
+        }
+
+        boolean cambio;
+        NodoDoble actual;
+        NodoDoble siguiente = null;
+
+        do {
+            cambio = false;
+            actual = cabeza;
+
+            while (actual.getSiguiente() != siguiente) {
+                if (actual.getPokemon().getNombre().compareTo(actual.getSiguiente().getPokemon().getNombre()) > 0) {
+                    Pokemon nuevo = actual.getPokemon();
+                    actual.setPokemon(actual.getSiguiente().getPokemon());
+                    actual.getSiguiente().setPokemon(nuevo);
+                    cambio = true;
+                }
+                actual = actual.getSiguiente();
+            }
+            siguiente = actual;
+        } while (cambio);
+    }
 }

@@ -114,7 +114,8 @@ public class Buscador implements Interface {
                     //MostrarPokemonPorRango();
                     break;
                 case "2":
-
+                    listaPokemon.ordenarAlfabeticamente();
+                    listaPokemon.imprimirAdelante();
                     //MostrarPokemonAlfabet();
                     break;
                 case "3":
