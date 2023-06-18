@@ -69,8 +69,12 @@ public class ListaNodoDoble {
     }
 
     public void imprimirAdelante() {
+        if (IsVacia()) {
+            System.out.println("La lista está vacía");
+            return;
+        }
         NodoDoble actual = cabeza;
-        while (actual != null) {
+        while (actual.getSiguiente() != null) {
             System.out.print(actual.getPokemon() + " ");
             actual = actual.getSiguiente();
         }
@@ -100,11 +104,7 @@ public class ListaNodoDoble {
         if (this.cabeza == null) {
             this.cabeza = nuevoNodo;
             this.tail = nuevoNodo;
-            cabeza.setSiguiente(null);
-            tail.setSiguiente(null);
         }
-        cabeza.setAnterior(null);
-        tail.setSiguiente(null);
 
         NodoDoble aux = this.cabeza;
         while (aux.getSiguiente() != null){
@@ -114,6 +114,13 @@ public class ListaNodoDoble {
         nuevoNodo.setAnterior(aux);
         setTail(nuevoNodo);
     }
+    public int tamanio(){
+        int contador = 0;
+        for(NodoDoble aux = this.cabeza; aux != null; aux = aux.getSiguiente()){
+            contador ++;
+        }
+        return contador;
+    }
 
     public void setTail(NodoDoble tail) {
         this.tail = tail;
@@ -122,4 +129,6 @@ public class ListaNodoDoble {
     public NodoDoble getTail() {
         return tail;
     }
+
+    public NodoDoble getCabeza() {return cabeza;}
 }

@@ -5,7 +5,10 @@ import coleccion.ListaNodoDoble;
 import model.Pokemon;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Buscador implements Interface {
@@ -15,15 +18,18 @@ public class Buscador implements Interface {
         this.listaPokemon = new ListaNodoDoble();
     }
 
+
     @Override
     public void lecturaArchivo() {
         Scanner scanner = null;
+
         try {
             scanner = new Scanner(new File("kanto.txt"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (FileNotFoundException var14) {
+            throw new RuntimeException(var14);
         }
-        while (scanner.hasNextLine()) {
+
+        while(scanner.hasNextLine()) {
             String linea = scanner.nextLine().trim();
             if (!linea.isEmpty()) {
                 String[] datos = linea.split(",");
@@ -31,54 +37,52 @@ public class Buscador implements Interface {
                 String nombre;
                 String etapa;
                 String evolucion1;
-                String evolucion2;
-                String evolucion3;
-                String evolucionAnterior;
                 String tipo1;
                 String tipo2;
-
-                if (datos.length == 7){
+                Pokemon pokemon;
+                if (datos.length == 7) {
                     id = Integer.parseInt(datos[0].trim());
                     nombre = datos[1].trim();
                     etapa = datos[2].trim();
                     evolucion1 = datos[3].trim();
-                    evolucionAnterior = datos[4].trim();
+                    String evolucionAnterior = datos[4].trim();
                     tipo1 = datos[5].trim();
                     tipo2 = datos[6].trim();
-                    Pokemon pokemon = new Pokemon(id, nombre, etapa, evolucion1, evolucionAnterior, tipo1, tipo2);
-                    listaPokemon.insertar(pokemon);
-                }
-                else if (datos.length==8){
+                    System.out.println(nombre);
+                    pokemon = new Pokemon(id, nombre, etapa, evolucion1, evolucionAnterior, tipo1, tipo2);
+                    this.listaPokemon.agregarAlInicio(pokemon);
+                } else if (datos.length == 8) {
                     id = Integer.parseInt(datos[0].trim());
                     nombre = datos[1].trim();
                     etapa = datos[2].trim();
                     evolucion1 = datos[3].trim();
-                    evolucion2 = datos[4].trim();
-                    evolucion3 = datos[5].trim();
+                    String evolucion2 = datos[4].trim();
+                    String evolucion3 = datos[5].trim();
                     tipo1 = datos[6].trim();
                     tipo2 = datos[7].trim();
-                    Pokemon pokemon = new Pokemon(id,nombre,etapa,evolucion1,evolucion2,evolucion3,tipo1,tipo2);
-                    listaPokemon.insertar(pokemon);
-                }
-                else if (datos.length==5){
+                    System.out.println(nombre);
+                    pokemon = new Pokemon(id, nombre, etapa, evolucion1, evolucion2, evolucion3, tipo1, tipo2);
+                    this.listaPokemon.agregarAlInicio(pokemon);
+
+                } else if (datos.length == 5) {
                     id = Integer.parseInt(datos[0].trim());
                     nombre = datos[1].trim();
                     etapa = datos[2].trim();
                     tipo1 = datos[3].trim();
                     tipo2 = datos[4].trim();
-                    Pokemon pokemon = new Pokemon(id,nombre,etapa,tipo1,tipo2);
-                    listaPokemon.insertar(pokemon);
-                }
-                else if (datos.length==6){
+                    System.out.println(nombre);
+                    pokemon = new Pokemon(id, nombre, etapa, tipo1, tipo2);
+                    this.listaPokemon.agregarAlInicio(pokemon);
+                } else if (datos.length == 6) {
                     id = Integer.parseInt(datos[0].trim());
                     nombre = datos[1].trim();
                     etapa = datos[2].trim();
                     evolucion1 = datos[3].trim();
                     tipo1 = datos[4].trim();
                     tipo2 = datos[5].trim();
-                    Pokemon pokemon = new Pokemon(id,nombre,etapa,evolucion1,tipo1,tipo2);
-                    listaPokemon.insertar(pokemon);
-
+                    System.out.println(nombre);
+                    pokemon = new Pokemon(id, nombre, etapa, evolucion1, tipo1, tipo2);
+                    this.listaPokemon.agregarAlInicio(pokemon);
                 }
             }
         }
@@ -86,9 +90,11 @@ public class Buscador implements Interface {
     }
 
 
-    @Override
-    public void menu() {
 
+
+
+    @Override
+    public void menu () {
         Scanner scanner1 = new Scanner(System.in);
         String opcion;
         do {
@@ -133,5 +139,10 @@ public class Buscador implements Interface {
         } while (!opcion.equals("6"));
     }
 
+    public void MostrarPokemonPorRango () {
+        // segun su id en orden creciente
+    }
+
 }
+
 
