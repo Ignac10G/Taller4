@@ -1,6 +1,9 @@
+package coleccion;
 
+import coleccion.NodoDoble;
+import model.Pokemon;
 
-class ListaNodoDoble {
+public class ListaNodoDoble {
     private NodoDoble cabeza;
     private NodoDoble tail;
 
@@ -9,7 +12,7 @@ class ListaNodoDoble {
     }
 
     public boolean IsVacia() {
-        return cabeza == null;
+        return this.cabeza == null;
     }
 
     public void agregarAlInicio(Pokemon pokemon) {

@@ -1,3 +1,9 @@
+package coleccion;
+
+import coleccion.Interface;
+import coleccion.ListaNodoDoble;
+import model.Pokemon;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -99,19 +105,23 @@ public class Buscador implements Interface {
 
             switch (opcion) {
                 case "1":
-
+                    //MostrarPokemonPorRango();
                     break;
                 case "2":
 
+                    //MostrarPokemonAlfabet();
                     break;
                 case "3":
 
+                    //MostrarPokemonTipo();
                     break;
                 case "4":
 
+                    //MostrarTodosPrimeraEvo();
                     break;
                 case "5":
 
+                    //BuscarPokemon();
                     break;
                 case "6":
                     System.out.println("¡Nos vemos en la proxima ocasión!");
@@ -122,5 +132,6 @@ public class Buscador implements Interface {
             }
         } while (!opcion.equals("6"));
     }
+
 }
 

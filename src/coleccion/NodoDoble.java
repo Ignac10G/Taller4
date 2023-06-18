@@ -1,3 +1,7 @@
+package coleccion;
+
+import model.Pokemon;
+
 public class NodoDoble {
     private Pokemon pokemon;
     private NodoDoble siguiente;
