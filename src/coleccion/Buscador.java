@@ -88,10 +88,6 @@ public class Buscador implements Interface {
         scanner.close();
     }
 
-
-
-
-
     @Override
     public void menu () {
         Scanner scanner1 = new Scanner(System.in);
@@ -115,18 +111,15 @@ public class Buscador implements Interface {
                 case "2":
                     listaPokemon.ordenarAlfabeticamente();
                     listaPokemon.imprimirAdelante();
-                    //MostrarPokemonAlfabet();
                     break;
                 case "3":
 
                     //MostrarPokemonTipo();
                     break;
                 case "4":
-
-                    //MostrarTodosPrimeraEvo();
+                    MostrarTodosPrimeraEvo(listaPokemon.getCabeza());
                     break;
                 case "5":
-
                     BuscarPokemon();
                     break;
                 case "6":
@@ -217,6 +210,22 @@ public class Buscador implements Interface {
     }
     public String capitalize(String str){
         return str.substring(0,1).toUpperCase()+str.substring(1).toLowerCase();
+    }
+    public void MostrarTodosPrimeraEvo(NodoDoble cabeza){
+        List<Pokemon> listaPoke = new ArrayList<>();
+        NodoDoble nodoActual = cabeza;
+        while (nodoActual != null) {
+            listaPoke.add(nodoActual.getPokemon());
+            nodoActual = nodoActual.getSiguiente();
+        }
+
+        listaPoke.sort(Comparator.comparingInt(Pokemon::getId));
+
+        for (Pokemon pokemon : listaPoke) {
+            if (Objects.equals(pokemon.getEtapa(), "Primera Evolucion")){
+                desplegarPokemon(pokemon);
+            }
+        }
     }
 
 }

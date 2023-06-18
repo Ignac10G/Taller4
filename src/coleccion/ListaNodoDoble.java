@@ -72,8 +72,7 @@ public class ListaNodoDoble {
         actual.getAnterior().setSiguiente(actual.getSiguiente());
     }
 
-<<<<<<< HEAD
-=======
+
     public void imprimirAdelante() {
         NodoDoble actual = cabeza;
         while (actual != null) {
@@ -100,7 +99,7 @@ public class ListaNodoDoble {
         System.out.println();
     }
 
->>>>>>> 37f2dcdbaeb7502f47cb5257eb24511759a2845b
+
     public void insertar(Pokemon pokemon) {
         NodoDoble nuevoNodo = new NodoDoble(pokemon);
         if (this.cabeza == null) {
@@ -145,7 +144,6 @@ public class ListaNodoDoble {
         }
         return null;
     }
-
     public void setTail(NodoDoble tail) {
         this.tail = tail;
     }
