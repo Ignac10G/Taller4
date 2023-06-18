@@ -69,10 +69,6 @@ public class ListaNodoDoble {
     }
 
     public void imprimirAdelante() {
-        if (IsVacia()) {
-            System.out.println("La lista está vacía");
-            return;
-        }
         NodoDoble actual = cabeza;
         while (actual != null) {
             System.out.println(actual.getPokemon().getNombre());
@@ -145,7 +141,6 @@ public class ListaNodoDoble {
         do {
             cambio = false;
             actual = cabeza;
-
             while (actual.getSiguiente() != siguiente) {
                 if (actual.getPokemon().getNombre().compareTo(actual.getSiguiente().getPokemon().getNombre()) > 0) {
                     Pokemon nuevo = actual.getPokemon();
