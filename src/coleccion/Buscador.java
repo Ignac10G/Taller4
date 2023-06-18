@@ -7,9 +7,8 @@ import model.Pokemon;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
+
 
 public class Buscador implements Interface {
     private ListaNodoDoble listaPokemon;
@@ -111,7 +110,7 @@ public class Buscador implements Interface {
 
             switch (opcion) {
                 case "1":
-                    //MostrarPokemonPorRango();
+                    ordenarPokemonMenorMayor(listaPokemon.getCabeza());
                     break;
                 case "2":
 
@@ -127,7 +126,7 @@ public class Buscador implements Interface {
                     break;
                 case "5":
 
-                    //BuscarPokemon();
+                    BuscarPokemon();
                     break;
                 case "6":
                     System.out.println("¡Nos vemos en la proxima ocasión!");
@@ -139,8 +138,84 @@ public class Buscador implements Interface {
         } while (!opcion.equals("6"));
     }
 
-    public void MostrarPokemonPorRango () {
-        // segun su id en orden creciente
+    public static void ordenarPokemonMenorMayor(NodoDoble cabeza) {
+        List<Pokemon> listaPoke = new ArrayList<>();
+        NodoDoble nodoActual = cabeza;
+        while (nodoActual != null) {
+            listaPoke.add(nodoActual.getPokemon());
+            nodoActual = nodoActual.getSiguiente();
+        }
+
+        listaPoke.sort(Comparator.comparingInt(Pokemon::getId));
+
+        for (Pokemon pokemon : listaPoke) {
+            desplegarPokemon(pokemon);
+        }
+    }
+    private static void desplegarPokemon(Pokemon pokemon){
+        String etapa = pokemon.getEtapa();
+        String evoluciones = null;
+        if (Objects.equals(etapa, "Basico")){
+            String evolucionSi = pokemon.getEvolucionSiguiente();
+            if (evolucionSi == null){
+                evoluciones = "No tiene mas evoluciones";
+            }else{
+                evoluciones = evolucionSi;
+            }
+        }else if (Objects.equals(etapa, "Primera Evolucion") || Objects.equals(etapa, "Segunda Evolucion")){
+            String evolucionSi = pokemon.getEvolucionSiguiente();
+            String evolucionPr = pokemon.getEvolucionPrevia();
+            if (evolucionSi == null){
+                evoluciones = evolucionPr;
+            } else {
+                evoluciones = evolucionPr +", " +evolucionSi;
+            }
+        }
+        System.out.print("-----------------------------------\n" +
+                "| Pokemon: " +pokemon.getNombre() +"\n"+
+                "| ID: " +pokemon.getId() +"\n"+
+                "| Etapa: " +pokemon.getEtapa()+"\n"+
+                "| Evoluciones: " +evoluciones +"\n"+
+                "| Tipo1 : " +pokemon.getTipo1() +"\n"+
+                "| Tipo2 : " +pokemon.getTipo2() +"\n"+
+                "-----------------------------------\n" );
+    }
+    public void BuscarPokemon(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese nombre o ID del Pokemon que desee buscar: ");
+        String opcion = sc.nextLine();
+        NodoDoble pokemon = listaPokemon.buscarPorNombre(capitalize(opcion));
+        if (pokemon == null){
+            pokemon = listaPokemon.buscarPorId(Integer.parseInt(opcion));
+            desplegarPokemon(pokemon.getPokemon());
+            desplegarPoke(pokemon);
+
+        }else{
+            desplegarPokemon(pokemon.getPokemon());
+            desplegarPoke(pokemon);
+        }
+    }
+    public void desplegarPoke(NodoDoble pokemon){
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            if (pokemon.getPokemon().getEvolucionSiguiente() != null || pokemon.getPokemon().getEvolucionPrevia() != null) {
+                System.out.println("¿Desea averiguar sobre sus evoluciones?(SI/NO): ");
+                String opcion2 = sc.nextLine();
+                if (opcion2.equalsIgnoreCase("SI")) {
+                    System.out.println("Ingrese nombre del Pokemon: ");
+                    String nombre = sc.nextLine();
+                    pokemon = listaPokemon.buscarPorNombre(capitalize(nombre));
+                    desplegarPokemon(pokemon.getPokemon());
+                } else {
+                    break;
+                }
+            }else {
+                break;
+            }
+        }
+    }
+    public String capitalize(String str){
+        return str.substring(0,1).toUpperCase()+str.substring(1).toLowerCase();
     }
 
 }

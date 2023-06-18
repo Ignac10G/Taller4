@@ -3,6 +3,10 @@ package coleccion;
 import coleccion.NodoDoble;
 import model.Pokemon;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class ListaNodoDoble {
     private NodoDoble cabeza;
     private NodoDoble tail;
@@ -68,37 +72,6 @@ public class ListaNodoDoble {
         actual.getAnterior().setSiguiente(actual.getSiguiente());
     }
 
-    public void imprimirAdelante() {
-        if (IsVacia()) {
-            System.out.println("La lista está vacía");
-            return;
-        }
-        NodoDoble actual = cabeza;
-        while (actual.getSiguiente() != null) {
-            System.out.print(actual.getPokemon() + " ");
-            actual = actual.getSiguiente();
-        }
-        System.out.println();
-    }
-
-    public void imprimirAtras() {
-        if (IsVacia()) {
-            System.out.println("La lista está vacía");
-            return;
-        }
-
-        NodoDoble actual = cabeza;
-        while (actual.getSiguiente() != null) {
-            actual = actual.getSiguiente();
-        }
-
-        while (actual != null) {
-            System.out.print(actual.getPokemon() + " ");
-            actual = actual.getAnterior();
-        }
-        System.out.println();
-    }
-
     public void insertar(Pokemon pokemon) {
         NodoDoble nuevoNodo = new NodoDoble(pokemon);
         if (this.cabeza == null) {
@@ -120,6 +93,28 @@ public class ListaNodoDoble {
             contador ++;
         }
         return contador;
+    }
+
+    public NodoDoble buscarPorId(int id) {
+        NodoDoble actual = cabeza;
+        while (actual != null) {
+            if (actual.getPokemon().getId() == id) {
+                return actual;
+            }
+            actual = actual.getSiguiente();
+        }
+        return null;
+    }
+    public NodoDoble buscarPorNombre(String nombre) {
+        NodoDoble actual = cabeza;
+        while (actual != null) {
+            if (actual.getPokemon().getNombre().equals(nombre)) {
+                return actual;
+            }
+
+            actual = actual.getSiguiente();
+        }
+        return null;
     }
 
     public void setTail(NodoDoble tail) {
