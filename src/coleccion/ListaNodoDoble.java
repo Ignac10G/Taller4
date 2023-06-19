@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static coleccion.Buscador.desplegarPokemon;
+
 public class ListaNodoDoble {
     private NodoDoble cabeza;
     private NodoDoble tail;
@@ -76,7 +78,7 @@ public class ListaNodoDoble {
     public void imprimirAdelante() {
         NodoDoble actual = cabeza;
         while (actual != null) {
-            System.out.println(actual.getPokemon().getNombre());
+            desplegarPokemon(actual.getPokemon());
             actual = actual.getSiguiente();
         }
     }
@@ -137,6 +139,17 @@ public class ListaNodoDoble {
         NodoDoble actual = cabeza;
         while (actual != null) {
             if (actual.getPokemon().getNombre().equals(nombre)) {
+                return actual;
+            }
+
+            actual = actual.getSiguiente();
+        }
+        return null;
+    }
+    public NodoDoble buscarPorTipo(String tipo) {
+        NodoDoble actual = cabeza;
+        while (actual != null) {
+            if (actual.getPokemon().getTipo1().equals(tipo) || actual.getPokemon().getTipo2().equals(tipo)) {
                 return actual;
             }
 

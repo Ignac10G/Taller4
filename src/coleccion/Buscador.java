@@ -47,7 +47,6 @@ public class Buscador implements Interface {
                     String evolucionAnterior = datos[4].trim();
                     tipo1 = datos[5].trim();
                     tipo2 = datos[6].trim();
-                    System.out.println(nombre);
                     pokemon = new Pokemon(id, nombre, etapa, evolucion1, evolucionAnterior, tipo1, tipo2);
                     this.listaPokemon.agregarAlInicio(pokemon);
                 } else if (datos.length == 8) {
@@ -59,7 +58,6 @@ public class Buscador implements Interface {
                     String evolucion3 = datos[5].trim();
                     tipo1 = datos[6].trim();
                     tipo2 = datos[7].trim();
-                    System.out.println(nombre);
                     pokemon = new Pokemon(id, nombre, etapa, evolucion1, evolucion2, evolucion3, tipo1, tipo2);
                     this.listaPokemon.agregarAlInicio(pokemon);
 
@@ -69,7 +67,6 @@ public class Buscador implements Interface {
                     etapa = datos[2].trim();
                     tipo1 = datos[3].trim();
                     tipo2 = datos[4].trim();
-                    System.out.println(nombre);
                     pokemon = new Pokemon(id, nombre, etapa, tipo1, tipo2);
                     this.listaPokemon.agregarAlInicio(pokemon);
                 } else if (datos.length == 6) {
@@ -79,7 +76,6 @@ public class Buscador implements Interface {
                     evolucion1 = datos[3].trim();
                     tipo1 = datos[4].trim();
                     tipo2 = datos[5].trim();
-                    System.out.println(nombre);
                     pokemon = new Pokemon(id, nombre, etapa, evolucion1, tipo1, tipo2);
                     this.listaPokemon.agregarAlInicio(pokemon);
                 }
@@ -114,7 +110,7 @@ public class Buscador implements Interface {
                     break;
                 case "3":
 
-                    //MostrarPokemonTipo();
+                    MostrarPokemonTipo();
                     break;
                 case "4":
                     MostrarTodosPrimeraEvo(listaPokemon.getCabeza());
@@ -146,7 +142,7 @@ public class Buscador implements Interface {
             desplegarPokemon(pokemon);
         }
     }
-    private static void desplegarPokemon(Pokemon pokemon){
+    static void desplegarPokemon(Pokemon pokemon){
         String etapa = pokemon.getEtapa();
         String evoluciones = null;
         if (Objects.equals(etapa, "Basico")){
@@ -224,6 +220,23 @@ public class Buscador implements Interface {
         for (Pokemon pokemon : listaPoke) {
             if (Objects.equals(pokemon.getEtapa(), "Primera Evolucion")){
                 desplegarPokemon(pokemon);
+            }
+        }
+    }
+    public void MostrarPokemonTipo(){
+        List<Pokemon> listaPoke = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese el tipo: ");
+        String tipo = sc.nextLine();
+        NodoDoble pokemon = listaPokemon.buscarPorTipo(capitalize(tipo));
+        while (pokemon != null) {
+            listaPoke.add(pokemon.getPokemon());
+            pokemon = pokemon.getSiguiente();
+        }
+
+        for (Pokemon poke : listaPoke) {
+            if (poke.getTipo1().equals(capitalize(tipo)) || poke.getTipo2().equals(capitalize(tipo))){
+                desplegarPokemon(poke);
             }
         }
     }
