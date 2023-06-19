@@ -1,3 +1,75 @@
 @startuml
+class Buscador{
++ lecturaArchivo():void
++ menu(): void
++ ordenarPokemonMenorMayor(cabeza: NodoDoble): void
++ desplegarPokemon(pokemon: Pokemon): void
++ BuscarPokemon(): void
++ desplegarPoke(pokemon: NodoDoble): void
++ capitalize(str: String): String
++ MostrarTodosPrimeraEvo(cabeza: NodoDoble): void
++ MostrarPokemonTipo(): void
+}
+class ListaNodoDoble{
++ ListaNodoDoble()
++ IsVacia(): boolean
++ agregarAlInicio(pokemon: Pokemon): void
++ agregarAlFinal(pokemon: Pokemon): void
++ eliminar(pokemon: Pokemon): void
++ imprimirAdelante(): void
++ imprimirAtras() void
++ insertar(pokemon: Pokemon): void
++ tamanio(): int
++ buscarPorId(id: int): NodoDoble
++ buscarPorNombre(nombre: string): NodoDoble
++ buscarPorTipo(tipo: string): NodoDoble
++ setTail(tail: NodoDoble): void
++ getTail(): NodoDoble
++ getCabeza(): NodoDoble
++ ordenarAlfabeticamente(): void
+}
+class NodoDoble{
+- pokemon: Pokemon
+- siguiente: NodoDoble
+- anterior: NodoDoble
++ NodoDoble(pokemon: Pokemon)
++ getPokemon(): Pokemon
++ setPokemon(pokemon: Pokemon): void
++ getSiguiente(): NodoDoble
++ setSiguiente(siguiente: NodoDoble): void
++ getAnterior(): NodoDoble
++ setAnterior(anterior: NodoDoble): void
+}
+class Pokemon{
+- id: int
+- nombre: string
+- etapa: string
+- evolucionSiguiente: string
+- evolucionPrevia: string
+- tipo1: string
+- tipo2: string
++ Pokemon(int id, String nombre, String etapa, String evolucionSiguiente, String evolucionPrevia, String tipo1, String tipo2)
++ Pokemon(int id, String nombre, String etapa, String evolucionPrevia, String tipo1, String tipo2)
++ Pokemon(int id, String nombre, String etapa, String tipo1, String tipo2)
++ Pokemon(int id, String nombre, String etapa, String evolucionSiguiente, String evolucionPrevia,String evolucion3, String tipo1, String tipo2)
++ getId(): int
++ getNombre(): string
++ getEtapa(): string
++ getEvolucionSiguiente(): string
++ getEvolucionPrevia(): string
++ getTipo1(): string
++ getTipo2(): string
+}
+class Main{
++ main(args: String[]): static void
+}
+interface Interface{
++ lecturaArchivo(): void
++ menu(): void
+}
 
+Pokemon "0..*" <---* Buscador
+ListaNodoDoble *---> NodoDoble
+Pokemon <---* NodoDoble
+Interface <... Buscador
 @enduml
