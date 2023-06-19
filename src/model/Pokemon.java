@@ -1,5 +1,10 @@
 package model;
-
+/**
+ * Esta clase almacena los datos de los pokemones.
+ *@author: Ignacio Gavia
+ *@author: Vicente Castro
+ *
+ */
 public class Pokemon {
     private int id;
     private String nombre;
@@ -13,6 +18,10 @@ public class Pokemon {
     public Pokemon() {
     }
 
+    /**
+     *The constructor.
+     */
+
     public Pokemon(int id, String nombre, String etapa, String evolucionSiguiente, String evolucionPrevia, String tipo1, String tipo2) {
         this.id = id;
         this.nombre = nombre;
@@ -23,7 +32,9 @@ public class Pokemon {
         this.tipo2 = tipo2;
     }
 
-
+    /**
+     *The constructor v2.
+     */
     public Pokemon(int id, String nombre, String etapa, String evolucionPrevia, String tipo1, String tipo2) {
         this.id = id;
         this.nombre = nombre;
@@ -36,6 +47,9 @@ public class Pokemon {
 
     }
 
+    /**
+     *The constructor v3.
+     */
     public Pokemon(int id, String nombre, String etapa, String tipo1, String tipo2) {
         this.id = id;
         this.nombre = nombre;
@@ -46,7 +60,9 @@ public class Pokemon {
         this.tipo1 = tipo1;
         this.tipo2 = tipo2;
     }
-
+    /**
+     *The constructor v4.
+     */
     public Pokemon(int id, String nombre, String etapa, String evolucionSiguiente, String evolucionPrevia,String evolucion3, String tipo1, String tipo2) {
         this.id = id;
         this.nombre = nombre;

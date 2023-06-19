@@ -1,26 +1,37 @@
 package coleccion;
 
-import coleccion.NodoDoble;
 import model.Pokemon;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
 import static coleccion.Buscador.desplegarPokemon;
-
+/**
+ * Esta clase almacena los Nodos de los Pokemones.
+ * @author: Ignacio Gavia
+ * @author: Vicente Castro
+ */
 public class ListaNodoDoble {
     private NodoDoble cabeza;
     private NodoDoble tail;
 
+    /**
+     *The constructor.
+     */
     public ListaNodoDoble() {
         this.cabeza = null;
     }
 
+    /**
+     * Método para saber si la lista esta vacia o no.
+     * @return true si esta vacia.
+     */
     public boolean IsVacia() {
         return this.cabeza == null;
     }
 
+
+    /**
+     * Método que agrega un pokemon al inicio de la lista.
+     * @param pokemon Pokemon a agregar
+     */
     public void agregarAlInicio(Pokemon pokemon) {
         NodoDoble nuevoNodo = new NodoDoble(pokemon);
         if (IsVacia()) {
@@ -32,6 +43,10 @@ public class ListaNodoDoble {
         }
     }
 
+    /**
+     * Método que agrega un pokemon al final de la lista.
+     * @param pokemon Pokemon a agregar
+     */
     public void agregarAlFinal(Pokemon pokemon) {
         NodoDoble nuevoNodo = new NodoDoble(pokemon);
         if (IsVacia()) {
@@ -46,6 +61,10 @@ public class ListaNodoDoble {
         }
     }
 
+    /**
+     * Método que elimina un pokemon de la lista.
+     * @param pokemon Pokemon a eliminar
+     */
     public void eliminar(Pokemon pokemon) {
         if (IsVacia()) {
             System.out.println("La lista está vacía");
@@ -74,7 +93,9 @@ public class ListaNodoDoble {
         actual.getAnterior().setSiguiente(actual.getSiguiente());
     }
 
-
+    /**
+     * Método que muestra los pokemones en orden.
+     */
     public void imprimirAdelante() {
         NodoDoble actual = cabeza;
         while (actual != null) {
@@ -82,7 +103,9 @@ public class ListaNodoDoble {
             actual = actual.getSiguiente();
         }
     }
-
+    /**
+     * Método que muestra los pokemones en orden contrario.
+     */
     public void imprimirAtras() {
         if (IsVacia()) {
             System.out.println("La lista está vacía");
@@ -101,22 +124,10 @@ public class ListaNodoDoble {
         System.out.println();
     }
 
-
-    public void insertar(Pokemon pokemon) {
-        NodoDoble nuevoNodo = new NodoDoble(pokemon);
-        if (this.cabeza == null) {
-            this.cabeza = nuevoNodo;
-            this.tail = nuevoNodo;
-        }
-
-        NodoDoble aux = this.cabeza;
-        while (aux.getSiguiente() != null){
-            aux = aux.getSiguiente();
-        }
-        aux.setSiguiente(nuevoNodo);
-        nuevoNodo.setAnterior(aux);
-        setTail(nuevoNodo);
-    }
+    /**
+     * Método que muestra el tamaño de la lista.
+     * @return cantidad de elemetos.
+     */
     public int tamanio(){
         int contador = 0;
         for(NodoDoble aux = this.cabeza; aux != null; aux = aux.getSiguiente()){
@@ -125,6 +136,11 @@ public class ListaNodoDoble {
         return contador;
     }
 
+    /**
+     * Método que busca mediante una ID un Pokemon.
+     * @param id ID a buscar
+     * @return Nodo Pokemon.
+     */
     public NodoDoble buscarPorId(int id) {
         NodoDoble actual = cabeza;
         while (actual != null) {
@@ -135,6 +151,12 @@ public class ListaNodoDoble {
         }
         return null;
     }
+
+    /**
+     * Método que busca mediante nombre un Pokemon.
+     * @param nombre Nombre a buscar
+     * @return Nodo Pokemon.
+     */
     public NodoDoble buscarPorNombre(String nombre) {
         NodoDoble actual = cabeza;
         while (actual != null) {
@@ -146,6 +168,9 @@ public class ListaNodoDoble {
         }
         return null;
     }
+    /**
+     * Método que muestra los pokemones por tipo solicitado por consola.
+     */
     public NodoDoble buscarPorTipo(String tipo) {
         NodoDoble actual = cabeza;
         while (actual != null) {
@@ -167,7 +192,9 @@ public class ListaNodoDoble {
 
     public NodoDoble getCabeza() {return cabeza;}
 
-
+    /**
+     * Método que ordena de manera alfabetica mediante los nombres la lista de Pokemones.
+     */
     public void ordenarAlfabeticamente() {
         if (IsVacia()) {
             System.out.println("La lista está vacía");

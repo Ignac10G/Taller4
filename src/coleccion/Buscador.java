@@ -1,23 +1,29 @@
 package coleccion;
 
-import coleccion.Interface;
-import coleccion.ListaNodoDoble;
 import model.Pokemon;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
-
+/**
+ * Esta clase almacena las funciones principales del sistema.
+ * @author: Ignacio Gavia
+ * @author: Vicente Castro
+ */
 
 public class Buscador implements Interface {
     private ListaNodoDoble listaPokemon;
 
+    /**
+     * The constructor.
+     */
     public Buscador(){
         this.listaPokemon = new ListaNodoDoble();
     }
 
-
+    /**
+     * Lectura de archivo.
+     */
     @Override
     public void lecturaArchivo() {
         Scanner scanner = null;
@@ -84,6 +90,9 @@ public class Buscador implements Interface {
         scanner.close();
     }
 
+    /**
+     * Este método se encarga del control del menu principal del sofware.
+     */
     @Override
     public void menu () {
         Scanner scanner1 = new Scanner(System.in);
@@ -109,7 +118,6 @@ public class Buscador implements Interface {
                     listaPokemon.imprimirAdelante();
                     break;
                 case "3":
-
                     MostrarPokemonTipo();
                     break;
                 case "4":
@@ -128,6 +136,10 @@ public class Buscador implements Interface {
         } while (!opcion.equals("6"));
     }
 
+    /**
+     * Método que ordena de mayor a menor mediante el ID de los Pokemones.
+     * @param cabeza Nodo Pokemon.
+     */
     public static void ordenarPokemonMenorMayor(NodoDoble cabeza) {
         List<Pokemon> listaPoke = new ArrayList<>();
         NodoDoble nodoActual = cabeza;
@@ -142,6 +154,11 @@ public class Buscador implements Interface {
             desplegarPokemon(pokemon);
         }
     }
+
+    /**
+     * Método que muestra mediante consola la información de cada Pokemon.
+     * @param pokemon Pokemon a desplegar.
+     */
     static void desplegarPokemon(Pokemon pokemon){
         String etapa = pokemon.getEtapa();
         String evoluciones = null;
@@ -170,6 +187,11 @@ public class Buscador implements Interface {
                 "| Tipo2 : " +pokemon.getTipo2() +"\n"+
                 "-----------------------------------\n" );
     }
+
+    /**
+     * Método que pregunta mediante consola la ID o nombre del pokemon a buscar.
+     */
+    @Override
     public void BuscarPokemon(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese nombre o ID del Pokemon que desee buscar: ");
@@ -185,6 +207,12 @@ public class Buscador implements Interface {
             desplegarPoke(pokemon);
         }
     }
+
+    /**
+     * Medoto que desplega una tabla con las caracteristicas del pokemon.
+     * @param pokemon Nodo pokemon a desplegar.
+     */
+    @Override
     public void desplegarPoke(NodoDoble pokemon){
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -199,14 +227,27 @@ public class Buscador implements Interface {
                 } else {
                     break;
                 }
-            }else {
+            } else {
                 break;
             }
         }
     }
+
+    /**
+     * Método que recibe una concatenacion y transforma el primer caracte a mayuscula y los demas en minusulas.
+     * @param str palabra o cadena a capitalizar.
+     * @return String capitalizado.
+     */
+    @Override
     public String capitalize(String str){
-        return str.substring(0,1).toUpperCase()+str.substring(1).toLowerCase();
+        return str.substring(0, 1).toUpperCase()+str.substring(1).toLowerCase();
     }
+
+    /**
+     * Método que muestra los pokemones de primera evolucion.
+     * @param cabeza Nodo pokemon a mostrar.
+     */
+    @Override
     public void MostrarTodosPrimeraEvo(NodoDoble cabeza){
         List<Pokemon> listaPoke = new ArrayList<>();
         NodoDoble nodoActual = cabeza;
@@ -223,6 +264,11 @@ public class Buscador implements Interface {
             }
         }
     }
+
+    /**
+     * Método que muestra los pokemones por tipo solicitado por consola.
+     */
+    @Override
     public void MostrarPokemonTipo(){
         List<Pokemon> listaPoke = new ArrayList<>();
         Scanner sc = new Scanner(System.in);

@@ -1,12 +1,19 @@
 package coleccion;
 
 import model.Pokemon;
-
+/**
+ * Esta clase almacena las clases tipo Pokemon.
+ * @author: Ignacio Gavia
+ * @author: Vicente Castro
+ */
 public class NodoDoble {
     private Pokemon pokemon;
     private NodoDoble siguiente;
     private NodoDoble anterior;
 
+    /**
+     * the constructor
+     */
     public NodoDoble(Pokemon pokemon) {
         this.pokemon = pokemon;
         this.siguiente = null;
